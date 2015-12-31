@@ -1,0 +1,2 @@
+from heated_mattress import app
+app.run(debug=True, host='0.0.0.0')

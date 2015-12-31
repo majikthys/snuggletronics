@@ -1,0 +1,113 @@
+<!doctype html>
+<html ng-app="mattressApp">
+<head>
+
+    <script src="static/bower_components/angular/angular.min.js"></script>
+
+    <script src="static/bower_components/angular-resource/angular-resource.min.js"></script>
+
+    <script src="static/js/heated.mattress.js"></script>
+
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="static/bower_components/bootstrap/dist//js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+<body>
+<!--h2>Todo</h2>
+<div ng-controller="TodoListController as todoList">
+  <span>[[todoList.remaining()]] of [[todoList.todos.length]] remaining</span>
+  [ <a href="" ng-click="todoList.archive()">archive</a> ]
+  <ul class="unstyled">
+    <li ng-repeat="todo in todoList.todos">
+      <input type="checkbox" ng-model="todo.done">
+      <span class="done-[[todo.done]]">[[todo.text]]</span>
+    </li>
+  </ul>
+  <form ng-submit="todoList.addTodo()">
+    <input type="text" ng-model="todoList.todoText"  size="30"
+           placeholder="add new todo here">
+    <input class="btn-primary" type="submit" value="add">
+  </form>
+</div-->
+
+
+
+<div class="container-fluid">
+
+
+
+    <div class="form-horizontal">
+            <h3 class="text-center">Heated Mattress Control</h3>
+            <div ng-controller="MattressHeaterController as mattressHeater">
+                <form ng-submit="mattressHeater.setTemp()">
+
+                <table class="table text-center">
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">Left</th>
+                        <th class="text-center">Right</th>
+                    </tr>
+                    <!-- head row -->
+                    <tr>
+                        <th class="text-center">Head</th>
+                        <td>
+                            <select ng-model="submit_mattress.left_head_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="submit_mattress.right_head_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                    </tr>
+
+                    <!-- middle row -->
+                    <tr>
+                        <th class="text-center">Mid</th>
+                        <td>
+                            <select ng-model="submit_mattress.left_middle_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="submit_mattress.right_middle_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                    </tr>
+
+                    <!-- foot row -->
+                    <tr>
+                        <th class="text-center">Foot</th>
+                        <td>
+                            <select ng-model="submit_mattress.left_foot_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="submit_mattress.right_foot_power" ng-options="temp for temp in temp_values">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <div class="center-block">
+                        <button type="submit" class="btn btn-primary btn-lg active center-block">SET TEMP</button>
+                </div>
+                <div class="center-block">
+                        <button  ng-click="mattressHeater.turnOff()" type="button" class="btn btn-warning btn-lg active center-block">TURN OFF</button>
+                </div>
+            </form>
+
+            </div>
+    </div>
+</div>
+
+
+</body>
+</html>
