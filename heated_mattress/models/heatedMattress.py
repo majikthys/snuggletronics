@@ -1,7 +1,8 @@
 import pickle
 import time
 import os
-import RPi.GPIO as GPIO  ## Import GPIO Library
+import wiringpi2
+from time import sleep
 
 
 # TODO make ABC of HeatedMattress and make this an AveragingHeatedMattress
@@ -83,6 +84,9 @@ class HeatedMattress:
     #     [[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1],[1,1],[0,1]]
     # ]
 
+    wiringpi2.wiringPiSetup() # For sequential pin numbering, one of these MUST be called before using IO functions
+    wiringpi2.pinMode(0,1)  # Setup pin 11 (GPIO1)
+
 
     @staticmethod
     def usleep(x):
@@ -96,14 +100,10 @@ class HeatedMattress:
         self.left_foot_power = 0
         self.left_middle_power = 0
         self.left_head_power = 0
-        self.right_foot_power = 8
+        self.right_foot_power = 0
         self.right_middle_power = 0
         self.right_head_power = 0
         self._power_on = False
-        self._gpio_pin = 11
-
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self._gpio_pin, GPIO.OUT)
 
     @property
     def average_power(self):
@@ -172,7 +172,6 @@ class HeatedMattress:
         instead of merely power settings
         :return: pulse data
         """
-
         if self._power_on and self.sum_power == 0:  # all 0 indicates we actually mean to turn this off
             self._power_on = False
             return self.off_pulse_data
@@ -184,22 +183,12 @@ class HeatedMattress:
             return self.average_pulse_datas[self.average_power]
 
     def __send_command(self, pulse_data):
-        """
-        The argument pulse_data is an n item list of 2 item lists [[0, 63] [1,126], [0,63]... etc]
-        where the first element is is 1 for high or 0 for low, and the second is duration in micros
-        it would be incorrect, but harmless, for elements to fail to alternate between high and low
-        :param pulse_data: pulse arr ay
-        :return: nothing
-        """
         for pulse_pair in pulse_data:
             if pulse_pair[0] == 0:
-                GPIO.output(self._gpio_pin,GPIO.LOW)
-                # print("l", end="", flush=True)
+                wiringpi2.digitalWrite(0,0)  # Turn off
             else:
-                GPIO.output(self._gpio_pin,GPIO.HIGH)
-                # print("H", end="", flush=True)
+                wiringpi2.digitalWrite(0,1)  # Turn on
+            self.usleep(pulse_pair[1])
 
-            self.usleep
-        # always leave transmit pin low upon completion
-        GPIO.output(self._gpio_pin,GPIO.LOW)
-        # print("l", end="", flush=True)
+        wiringpi2.digitalWrite(0,0)  # Turn off
+
