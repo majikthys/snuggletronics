@@ -109,6 +109,21 @@ class HeatedMattress:
         self.right_head_power = 0
         self._power_on = False
 
+    def __repr__(self):
+        return "<HeatedMattress thread:'%s' self:'%s' (left_foot_power='%s', " \
+               "left_middle_power='%s', left_head_power='%s', " \
+               "right_foot_power='%s', right_middle_power='%s', " \
+               "right_head_power='%s', _power_on='%s')>" % (
+                threading.get_ident(),
+                id(self),
+                self.left_foot_power,
+                self.left_middle_power,
+                self.left_head_power,
+                self.right_foot_power,
+                self.right_middle_power,
+                self.right_head_power,
+                self._power_on)
+
     @property
     def average_power(self):
         return (self.left_foot_power + self.left_middle_power + self.left_head_power + self.right_foot_power +

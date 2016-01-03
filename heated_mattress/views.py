@@ -37,7 +37,7 @@ mattress_parser.add_argument('left_head_power', type=int, help='0 to 10', requir
 mattress_parser.add_argument('right_foot_power', type=int, help='0 to 10', required=True, choices=list(range(0, 11)))
 mattress_parser.add_argument('right_middle_power', type=int, help='0 to 10', required=True, choices=list(range(0, 11)))
 mattress_parser.add_argument('right_head_power', type=int, help='0 to 10', required=True, choices=list(range(0, 11)))
-mattress_parser.add_argument('power_on', default=True, type=bool, help='True is on false is off, defaults to true')
+mattress_parser.add_argument('power_on', default=True, type=bool, help='true is on false is off, defaults to true')
 
 mattress_parser_daily_runnable_parser = mattress_parser.copy()
 mattress_parser_daily_runnable_parser.add_argument('hour', type=int, help='0 to 24', required=True,
@@ -77,6 +77,20 @@ class DailyHeatedMattressJobsREST(DailyHeatedMattressJob, Resource):
 
 
 class HeatedMattressREST(HeatedMattress, Resource):
+    # singleton REST instance (we don't force base object to be a singleton)
+    __instance = None
+
+    def __init__(self):
+        if not HeatedMattressREST.__instance:
+            HeatedMattressREST.__instance = HeatedMattress()
+
+    def __getattr__(self, name):
+        return getattr(self.__instance, name)
+
+    def __setattr__(self, attr, value):
+        """ Delegate access to implementation """
+        return setattr(self.__instance, attr, value)
+
     @marshal_with(heated_mattress_fields)
     def get(self):
         return self
@@ -102,7 +116,7 @@ def get_index():
     return render_template('index.html', mattress=HeatedMattressREST(), headers={'Content-Type': 'application/json'})
 
 
-api.add_resource(HeatedMattressREST, '/api/mattress')
+api.add_resource(HeatedMattressREST, api_version_path + 'mattress')
 
 
 api.add_resource(DailyHeatedMattressJobsREST, api_version_path + 'mattress/jobs')
