@@ -58,3 +58,4 @@ target/
 venv
 bower_components
 .idea
+heated_mattress.sqlite3.db

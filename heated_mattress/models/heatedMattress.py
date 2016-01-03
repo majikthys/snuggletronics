@@ -2,11 +2,14 @@ import pickle
 import time
 import os
 import wiringpi2
-from time import sleep
+import threading
+import json
 
 
 # TODO make ABC of HeatedMattress and make this an AveragingHeatedMattress
 class HeatedMattress:
+    _class_lock = threading.Lock()  # When we write to device, we will need to lock out other threads
+
     """
     HeatedMattress provides basic power manipulation for a heated mattress.
     this class will also serve as basis for future TemperatureHeatedMattress, which will include
@@ -87,6 +90,7 @@ class HeatedMattress:
     wiringpi2.wiringPiSetup() # For sequential pin numbering, one of these MUST be called before using IO functions
     wiringpi2.pinMode(0,1)  # Setup pin 11 (GPIO1)
 
+    final_send_sleep_micros = 650 * 100  # used to insure adequate sleep between back to back sends
 
     @staticmethod
     def usleep(x):
@@ -114,6 +118,9 @@ class HeatedMattress:
     def sum_power(self):
         return self.left_foot_power + self.left_middle_power + self.left_head_power + self.right_foot_power + \
                self.right_middle_power + self.right_head_power
+    @property
+    def power_on(self):
+        return self._power_on
 
     def power_off(self):
         self.left_foot_power = 0
@@ -183,12 +190,21 @@ class HeatedMattress:
             return self.average_pulse_datas[self.average_power]
 
     def __send_command(self, pulse_data):
-        for pulse_pair in pulse_data:
-            if pulse_pair[0] == 0:
-                wiringpi2.digitalWrite(0,0)  # Turn off
-            else:
-                wiringpi2.digitalWrite(0,1)  # Turn on
-            self.usleep(pulse_pair[1])
+        with HeatedMattress._class_lock:  # to make sure we write to device one at time
+            print("Sending data: {}", json.dumps(pulse_data))
 
-        wiringpi2.digitalWrite(0,0)  # Turn off
+            # Note, the following methodology is "bit banging" which isn't reliable in a highly threaded
+            # environment. It it however, simple and easy to understand. It is recommended you run this code
+            # on a dedicated device.
+            for pulse_pair in pulse_data:
+                # TODO RENABLE WIRING2 CALLS
+                # if pulse_pair[0] == 0:
+                #     print('')
+                #     wiringpi2.digitalWrite(0,0)  # Turn off
+                # else:
+                #     wiringpi2.digitalWrite(0,1)  # Turn on
+                self.usleep(pulse_pair[1])
+
+            # wiringpi2.digitalWrite(0,0)  # Turn off
+            self.usleep(self.final_send_sleep_micros)  # sleep
 
