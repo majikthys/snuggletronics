@@ -2,6 +2,8 @@ from .heatedMattress import HeatedMattress
 from sqlalchemy import Column, Integer, Boolean
 from heated_mattress.database import Base, db_session
 import datetime
+import threading
+from threading import Timer
 
 
 class DailyHeatedMattressJob(HeatedMattress):
@@ -27,9 +29,9 @@ class DailyHeatedMattressJob(HeatedMattress):
             return int(self.run_minute / 60)
 
 
-
 class DailyHeatedMattressJobDAO(DailyHeatedMattressJob, Base):
     __tablename__ = 'daily_heated_mattress_jobs'
+    __class_lock = threading.Lock()  # When we write to device, we will need to lock out other threads
 
     id = Column(Integer, primary_key=True)
     run_minute = Column(Integer, unique=True)
@@ -85,3 +87,28 @@ class DailyHeatedMattressJobDAO(DailyHeatedMattressJob, Base):
         current_job = DailyHeatedMattressJobDAO.get_job(current_min)
         if current_job is not None:
             current_job.send_command()
+
+    _repeat_timer = None
+    _end_repeat = False
+    __job_poller_initialized = False
+
+    @staticmethod
+    def end_poller():
+        DailyHeatedMattressJobDAO._end_repeat = True
+        DailyHeatedMattressJobDAO._repeat_timer.cancel()
+        DailyHeatedMattressJobDAO.__job_poller_initialized = False
+
+    @staticmethod
+    def initialize_poller():
+        with DailyHeatedMattressJobDAO.__class_lock:  # to make sure we write to device one at time
+            if not DailyHeatedMattressJobDAO.__job_poller_initialized:
+                DailyHeatedMattressJobDAO.__job_poller_initialized = True
+                DailyHeatedMattressJobDAO._repeat_timer = Timer(60.0, DailyHeatedMattressJobDAO._run_scheduled_jobs)
+                DailyHeatedMattressJobDAO._repeat_timer.start()
+
+    @staticmethod
+    def _run_scheduled_jobs():
+        DailyHeatedMattressJobDAO.execute_current_job()
+        if not DailyHeatedMattressJobDAO._end_repeat:
+            _repeat_timer = Timer(60.0, DailyHeatedMattressJobDAO._run_scheduled_jobs)
+            _repeat_timer.start()

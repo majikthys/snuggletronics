@@ -1,6 +1,9 @@
 # snuggletronics
 Wirelessly controlled Sunbeam® heated mattress pads with a Raspberry Pi.
 
+# NOTE: alpha release, 
+Most notably missing data analysis, which means control is restricted to 10 averaged power settings (no zone heating). In the near future, after further data analysis full granularity of control will be provided
+
 ## Software Requirements
  * bower to install angular and bootstrap (defined by .bowerrc and bower.json)
  * python 3.3+ (to run flask)
@@ -284,6 +287,8 @@ A list containing Mattress State Jobs
 
 
 
+# Mattress Heater Remote FCC Link
+https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=N&application_id=omyk5lsFp8UZHuBL655tKw%3D%3D&fcc_id=O38-L85KQR
 
 
 
