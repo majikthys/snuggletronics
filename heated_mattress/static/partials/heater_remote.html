@@ -1,0 +1,25 @@
+
+<div class="container-fluid">
+<div>
+    <div class="pull-right"><a href="#/jobs"> <button type="button" class="btn btn-xs">Schedule Jobs</button></a></div>
+</div>
+    <div class="form-horizontal">
+            <h3 class="text-center">Heated Mattress Control</h3>
+            <div ng-controller="MattressHeaterController as mattressHeater">
+
+                <form ng-submit="mattressHeater.setTemp()">
+
+                    <div ng-include="'static/partials/heater_form.html'"></div>
+
+
+                <div class="center-block">
+                        <button type="submit" class="btn btn-primary btn-lg active center-block">SET TEMP</button>
+                </div>
+                <div class="center-block">
+                        <button  ng-click="mattressHeater.turnOff()" type="button" class="btn btn-warning btn-lg active center-block">TURN OFF</button>
+                </div>
+            </form>
+
+            </div>
+    </div>
+</div>

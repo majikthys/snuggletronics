@@ -1,0 +1,47 @@
+
+<table class="table text-center">
+    <tr>
+        <th class="text-center"></th>
+        <th class="text-center">Left</th>
+        <th class="text-center">Right</th>
+    </tr>
+    <!-- head row -->
+    <tr>
+        <th class="text-center">Head</th>
+        <td>
+            <select ng-model="submit_mattress.left_head_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+        <td>
+            <select ng-model="submit_mattress.right_head_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+    </tr>
+
+    <!-- middle row -->
+    <tr>
+        <th class="text-center">Mid</th>
+        <td>
+            <select ng-model="submit_mattress.left_middle_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+        <td>
+            <select ng-model="submit_mattress.right_middle_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+    </tr>
+
+    <!-- foot row -->
+    <tr>
+        <th class="text-center">Foot</th>
+        <td>
+            <select ng-model="submit_mattress.left_foot_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+        <td>
+            <select ng-model="submit_mattress.right_foot_power" ng-options="temp for temp in temp_values">
+            </select>
+        </td>
+    </tr>
+</table>
+

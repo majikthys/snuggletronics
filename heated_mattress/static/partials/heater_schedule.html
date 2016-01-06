@@ -1,0 +1,67 @@
+
+<div class="container-fluid">
+<div class="pull-right"><a href="#/"> <button type="button" class="btn btn-xs">Remote</button></a></div>
+
+    <div ng-controller="MattressHeaterController as mattressHeater">
+
+        <div class="form-horizontal">
+            <h4 class="text-center">Heated Mattress Scheduler</h4>
+            <form ng-submit="mattressHeater.addJob()">
+
+                <div ng-include="'static/partials/heater_form.html'"></div>
+
+                <div class="pull-right">
+                    <label for="hourSelect"> Hour: </label>
+                    <select id="hourSelect" ng-model="submit_job_hour"
+                            ng-options="hour for hour in hour_values"></select>
+                    <label for="minuteSelect"> Minute:</label>
+                    <select id="minuteSelect" ng-model="submit_job_minute"
+                            ng-options="minute for minute in minute_values"></select>
+                    <button type="submit" class="btn btn-sm active pull-right">Add Job</button>
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="form-horizontal"  style="margin-top:80px">
+            <h4 class="text-center">Heated Mattress Scheduled Jobs</h4>
+
+            <form>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th class="col-xs-1">Hour</th>
+                        <th class="col-xs-1">Min</th>
+                        <th class="col-xs-1">L Head</th>
+                        <th class="col-xs-1">L Mid</th>
+                        <th class="col-xs-1">L Foot</th>
+                        <th class="col-xs-1">R Head</th>
+                        <th class="col-xs-1">R Mid</th>
+                        <th class="col-xs-1">R Foot</th>
+                        <th class="col-xs-1"></th>
+                    </tr>
+                    <tr ng-repeat="mattress_job in mattress_jobs">
+
+                        <td class="col-xs-1">[[mattress_job.hour]]</td>
+                        <td class="col-xs-1">[[mattress_job.minute]]</td>
+                        <td class="col-xs-1">[[mattress_job.left_head_power]]</td>
+                        <td class="col-xs-1">[[mattress_job.left_middle_power]]</td>
+                        <td class="col-xs-1">[[mattress_job.left_foot_power]]</td>
+                        <td class="col-xs-1">[[mattress_job.right_head_power]]</td>
+                        <td class="col-xs-1">[[mattress_job.right_middle_power]]</td>
+                        <td class="col-xs-1">[[mattress_job.right_foot_power]]</td>
+                        <td class="col-xs-1">
+                            <button ng-click="mattressHeater.deleteJob(mattress_job)" type="button"
+                                    class="btn btn-warning btn-sm active center-block">remove
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+
+    </div>
+</div>
