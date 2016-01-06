@@ -22,6 +22,13 @@ The STPA-418H–B is available from Circuit Specialist (no affiliation) [http://
 
 Raspberry Pi is commonly available but I encourage you to keep our maker/hacker ecosystem fertile and support vendors that create original open source hardware [adafruit](http://adafruit.com) or [sparkfun](http://sparkfun.com)
 
+## The Circuit
+
+The circuit is quite elementary, simply connect VCC to GPIO +5v, GND to GPIO GND, and Data to GPIO 17 as illustrate here:
+
+![Circuit](docs/circuit.gif "Circuit")
+
+
 ## Installation
 
 Install npm and bower if you have not yet had a chance to do so.
