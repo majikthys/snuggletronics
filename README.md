@@ -4,6 +4,8 @@ Wirelessly controlled Sunbeam® heated mattress pads with a Raspberry Pi.
 # NOTE: alpha release, 
 Most notably missing data analysis, which means control is restricted to 10 averaged power settings (no zone heating). In the near future, after further data analysis full granularity of control will be provided
 
+see  [docs/TODO.md](docs/TODO.md) for tasks not yet done
+
 ## Software Requirements
  * bower to install angular and bootstrap (defined by .bowerrc and bower.json)
  * python 3.3+ (to run flask)
