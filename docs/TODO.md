@@ -1,5 +1,5 @@
 
-# Pateau 1 Tie up
+# Plateau 1 Tie up
 ---
 * make diagram of circuit for docs
 * make html nice
