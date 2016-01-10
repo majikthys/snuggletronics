@@ -1,5 +1,5 @@
 
-# Pateau 1 Tie up
+# Plateau 1 Tie up
 ---
 * make constants and config http://flask.pocoo.org/docs/0.10/config/
 * add cli data_acquisition_tools folder as sibling to heated_mattress w/ file processing util
