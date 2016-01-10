@@ -1,8 +1,6 @@
 
 # Pateau 1 Tie up
 ---
-* make diagram of circuit for docs
-* make html nice
 * make constants and config http://flask.pocoo.org/docs/0.10/config/
 * add cli data_acquisition_tools folder as sibling to heated_mattress w/ file processing util
 * review code and meditate on layout

@@ -17,6 +17,14 @@ var heatedMattressControllers = angular.module('heatedMattressControllers', []);
 //        $scope.orderProp = 'age';
 //
 //  }]);
+//
+heatedMattressControllers.filter('digits', function() {
+    return function(input) {
+       if (input < 10) input = '0' + input;
+
+      return input;
+    }
+  });
 
 heatedMattressControllers.controller('MattressHeaterController', ['$scope', '$resource',
     function MattressHeaterController($scope, $resource) {

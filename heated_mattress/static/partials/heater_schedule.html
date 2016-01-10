@@ -1,67 +1,79 @@
-
 <div class="container-fluid">
-<div class="pull-right"><a href="#/"> <button type="button" class="btn btn-xs">Remote</button></a></div>
-
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Heated Mattress Scheduler</a>
+            <div class="pull-right"><a href="#/">
+                <button type="button" class="btn navbar-btn btn-default"><span class="glyphicon glyphicon-play-circle"
+                                                                               aria-hidden="true"></span>
+                    Remote
+                </button>
+            </a></div>
+        </div>
+    </nav>
     <div ng-controller="MattressHeaterController as mattressHeater">
 
         <div class="form-horizontal">
-            <h4 class="text-center">Heated Mattress Scheduler</h4>
             <form ng-submit="mattressHeater.addJob()">
+                <div class="well well-sm">
+                    <div ng-include="'static/partials/heater_form.html'"></div>
 
-                <div ng-include="'static/partials/heater_form.html'"></div>
 
-                <div class="pull-right">
-                    <label for="hourSelect"> Hour: </label>
-                    <select id="hourSelect" ng-model="submit_job_hour"
-                            ng-options="hour for hour in hour_values"></select>
-                    <label for="minuteSelect"> Minute:</label>
-                    <select id="minuteSelect" ng-model="submit_job_minute"
-                            ng-options="minute for minute in minute_values"></select>
-                    <button type="submit" class="btn btn-sm active pull-right">Add Job</button>
+                    <div class="clearfix">
+                        <div class="pull-right">
+                            <label for="hourSelect"> Hour: </label>
+                            <select id="hourSelect" ng-model="submit_job_hour"
+                                    ng-options="hour for hour in hour_values"></select>
+                            <label for="minuteSelect"> Minute:</label>
+                            <select id="minuteSelect" ng-model="submit_job_minute"
+                                    ng-options="minute for minute in minute_values"></select>
+                            <button type="submit" class="btn btn-sm  btn-default">Add Job</button>
+                        </div>
+                    </div>
                 </div>
 
             </form>
 
-        </div>
+            <div class="well well-sm">
 
-
-        <div class="form-horizontal"  style="margin-top:80px">
-            <h4 class="text-center">Heated Mattress Scheduled Jobs</h4>
-
-            <form>
-
-                <table class="table table-striped">
+                <div class="text-center">
+                    <h4>Heated Mattress Schedule</h4>
+                </div>
+                <table class="table table-condensed">
                     <tr>
-                        <th class="col-xs-1">Hour</th>
-                        <th class="col-xs-1">Min</th>
-                        <th class="col-xs-1">L Head</th>
-                        <th class="col-xs-1">L Mid</th>
-                        <th class="col-xs-1">L Foot</th>
-                        <th class="col-xs-1">R Head</th>
-                        <th class="col-xs-1">R Mid</th>
-                        <th class="col-xs-1">R Foot</th>
-                        <th class="col-xs-1"></th>
+                        <th class="text-center">Time</th>
+                        <th class="text-center">L Head</th>
+                        <th class="text-center">L Mid</th>
+                        <th class="text-center">L Foot</th>
+                        <th class="text-center">R Head</th>
+                        <th class="text-center">R Mid</th>
+                        <th class="text-center">R Foot</th>
+                        <th class="text-center"></th>
                     </tr>
                     <tr ng-repeat="mattress_job in mattress_jobs">
 
-                        <td class="col-xs-1">[[mattress_job.hour]]</td>
-                        <td class="col-xs-1">[[mattress_job.minute]]</td>
-                        <td class="col-xs-1">[[mattress_job.left_head_power]]</td>
-                        <td class="col-xs-1">[[mattress_job.left_middle_power]]</td>
-                        <td class="col-xs-1">[[mattress_job.left_foot_power]]</td>
-                        <td class="col-xs-1">[[mattress_job.right_head_power]]</td>
-                        <td class="col-xs-1">[[mattress_job.right_middle_power]]</td>
-                        <td class="col-xs-1">[[mattress_job.right_foot_power]]</td>
-                        <td class="col-xs-1">
+                        <td class="text-center">[[mattress_job.hour]]:[[mattress_job.minute|digits]]</td>
+                        <td class="text-center">[[mattress_job.left_head_power]]</td>
+                        <td class="text-center">[[mattress_job.left_middle_power]]</td>
+                        <td class="text-center">[[mattress_job.left_foot_power]]</td>
+                        <td class="text-center">[[mattress_job.right_head_power]]</td>
+                        <td class="text-center">[[mattress_job.right_middle_power]]</td>
+                        <td class="text-center">[[mattress_job.right_foot_power]]</td>
+                        <td class="text-center">
                             <button ng-click="mattressHeater.deleteJob(mattress_job)" type="button"
-                                    class="btn btn-warning btn-sm active center-block">remove
+                                    class="btn btn-warning btn-sm "><span class="glyphicon glyphicon-remove"
+                                                                          aria-hidden="true"></span>
+
                             </button>
                         </td>
                     </tr>
                 </table>
-            </form>
-
+            </div>
         </div>
 
+
     </div>
+
+</div>
+
+
 </div>

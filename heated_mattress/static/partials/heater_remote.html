@@ -1,10 +1,20 @@
-
 <div class="container-fluid">
-<div>
-    <div class="pull-right"><a href="#/jobs"> <button type="button" class="btn btn-xs">Schedule Jobs</button></a></div>
-</div>
+
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Heated Mattress Remote</a>
+            <div class="pull-right"><a href="#/jobs">
+                <button type="button" class="btn navbar-btn btn-default"><span class="glyphicon glyphicon-time"
+                                                                               aria-hidden="true"></span>
+                    Schedule
+                </button>
+            </a></div>
+        </div>
+    </nav>
+
     <div class="form-horizontal">
-            <h3 class="text-center">Heated Mattress Control</h3>
+        <div class="well well-sm">
+
             <div ng-controller="MattressHeaterController as mattressHeater">
 
                 <form ng-submit="mattressHeater.setTemp()">
@@ -12,14 +22,23 @@
                     <div ng-include="'static/partials/heater_form.html'"></div>
 
 
-                <div class="center-block">
-                        <button type="submit" class="btn btn-primary btn-lg active center-block">SET TEMP</button>
-                </div>
-                <div class="center-block">
-                        <button  ng-click="mattressHeater.turnOff()" type="button" class="btn btn-warning btn-lg active center-block">TURN OFF</button>
-                </div>
-            </form>
+                    <div class="center-block">
+                        <button type="submit" class="btn btn-primary btn-lg active center-block">
+                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                            SET TEMP
+                        </button>
+                    </div>
+                    <div class="center-block">
+                        <button ng-click="mattressHeater.turnOff()" type="button"
+                                disabled="disabled" class="btn btn-warning btn-lg active center-block">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            TURN OFF
+                        </button>
+                    </div>
+                </form>
 
             </div>
+        </div>
+
     </div>
 </div>
