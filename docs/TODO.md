@@ -7,6 +7,8 @@
 * add a spinner to remote page
 * daemon service script
 * add threaded false to app.run app.run(debug=True, host='0.0.0.0', threaded=False) 
+* review and improve documentation - add value propositions
+* make sender by composition 
 
 
 # Scheduling
