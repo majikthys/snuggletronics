@@ -206,20 +206,20 @@ class HeatedMattress:
 
     def __send_command(self, pulse_data):
         with HeatedMattress._class_lock:  # to make sure we write to device one at time
-            print("Sending data: {}", json.dumps(pulse_data))
+#            print("Sending data: {}", json.dumps(pulse_data))
 
             # Note, the following methodology is "bit banging" which isn't reliable in a highly threaded
             # environment. It it however, simple and easy to understand. It is recommended you run this code
             # on a dedicated device.
             for pulse_pair in pulse_data:
-                # TODO RENABLE WIRING2 CALLS
-                # if pulse_pair[0] == 0:
-                #     print('')
-                #     wiringpi2.digitalWrite(0,0)  # Turn off
-                # else:
-                #     wiringpi2.digitalWrite(0,1)  # Turn on
+                TODO RENABLE WIRING2 CALLS
+                if pulse_pair[0] == 0:
+                    print('')
+                    wiringpi2.digitalWrite(0,0)  # Turn off
+                else:
+                    wiringpi2.digitalWrite(0,1)  # Turn on
                 self.usleep(pulse_pair[1])
 
-            # wiringpi2.digitalWrite(0,0)  # Turn off
+            wiringpi2.digitalWrite(0,0)  # Turn off
             self.usleep(self.final_send_sleep_micros)  # sleep
 
