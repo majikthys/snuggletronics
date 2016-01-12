@@ -213,7 +213,6 @@ class HeatedMattress:
             # on a dedicated device.
             for pulse_pair in pulse_data:
                 if pulse_pair[0] == 0:
-                    print('')
                     wiringpi2.digitalWrite(0,0)  # Turn off
                 else:
                     wiringpi2.digitalWrite(0,1)  # Turn on
