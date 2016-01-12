@@ -1,6 +1,11 @@
 # snuggletronics
 Wirelessly controlled Sunbeam® heated mattress pads with a Raspberry Pi.
 
+Snuggletronics project allows you to take control of your Sunbeam heated mattress pad so that you bed is toast warm exactly when you want it to be. Snuggletronics also lets you remote control your mattress pad from your phone, tablet, or computer. 
+
+You need only add a $4 radio module connected to a Raspberry Pi to take advantage of this application. In addition to the easy web interface, Snuggletronics presents a REST API which will allow you to control your mattress heat however you like!
+
+
 # NOTE: alpha release, 
 Most notably missing data analysis, which means control is restricted to 10 averaged power settings (no zone heating). In the near future, after further data analysis full granularity of control will be provided
 
@@ -301,3 +306,16 @@ https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&Reque
 
 
 
+# Licenses
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"/>
+</a>
+<br/>
+
+Snuggletronics Readme and Instructions
+by <a href="https://github.com/majikthys"> Jeremy Franklin-Ross</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">  Creative Commons Attribution 4.0 International License </a>.<br/>
+Based on a work at <a href="https://github.com/majikthys/snuggletronics/blob/master/README.md" rel="dct:source"> https://github.com/majikthys/snuggletronics/</a>.<br/>
+
+Application and software is licensed in MIT License: <a href="https://github.com/majikthys/snuggletronics/blob/master/LICENSE">
+    https://github.com/majikthys/snuggletronics/blob/master/LICENSE</a>
