@@ -212,7 +212,6 @@ class HeatedMattress:
             # environment. It it however, simple and easy to understand. It is recommended you run this code
             # on a dedicated device.
             for pulse_pair in pulse_data:
-                TODO RENABLE WIRING2 CALLS
                 if pulse_pair[0] == 0:
                     print('')
                     wiringpi2.digitalWrite(0,0)  # Turn off
